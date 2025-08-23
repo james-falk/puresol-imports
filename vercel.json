@@ -1,7 +1,6 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": ".next",
   "installCommand": "npm ci",
   "framework": "nextjs",
   "regions": ["iad1"],
@@ -40,8 +39,16 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "source": "/about",
+      "destination": "/about"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact"
+    },
+    {
+      "source": "/showcase",
+      "destination": "/showcase"
     }
   ]
 }
