@@ -1,7 +1,7 @@
 export const AppConfig = {
   site_name: 'PureSol Imports',
-  title: 'PureSol Imports - Premium Fresh Fruits Worldwide',
+  title: 'PureSol Imports - Farm Direct Fruits from Ecuador',
   description:
-    'Premium fruit importing company delivering the freshest, highest quality fruits from around the world. Discover exotic and seasonal fruits with exceptional taste and nutrition.',
+    "True farm direct fruits from our own farms in Ecuador's lush valleys. We grow, pack, and ship our own fruits—no middlemen, no brokers, just pure quality from farm to your business.",
   locale: 'en',
 };

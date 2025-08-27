@@ -55,28 +55,13 @@ const Contact = () => {
                 Home
               </Link>
             </li>
-            <li>
-              <Link
-                href="/about"
-                className="tracking-wide transition-colors hover:text-primary-600"
-              >
-                About
-              </Link>
-            </li>
+
             <li>
               <Link
                 href="/contact"
                 className="font-medium tracking-wide text-primary-700"
               >
                 Contact
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/showcase"
-                className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text font-medium tracking-wide text-transparent transition-colors hover:text-primary-600"
-              >
-                Showcase ✨
               </Link>
             </li>
           </NavbarTwoColumns>
@@ -86,8 +71,8 @@ const Contact = () => {
       <Background color="bg-gradient-to-b from-primary-50 to-white">
         <Section yPadding="pt-24 pb-32">
           <div className="mx-auto max-w-4xl text-center">
-            <h1 className="md:text-7xl mb-8 text-6xl font-light leading-tight tracking-tight text-neutral-900">
-              Get in Touch
+            <h1 className="md:text-7xl mb-8 text-6xl font-bold leading-tight tracking-tight text-neutral-900">
+              <span className="text-gradient">Get in Touch</span>
             </h1>
             <div className="mx-auto mb-8 h-1 w-24 bg-primary-500"></div>
             <p className="mx-auto max-w-3xl text-xl font-light leading-relaxed text-neutral-600 md:text-2xl">
@@ -111,47 +96,11 @@ const Contact = () => {
                 <p className="mb-8 text-lg text-gray-600">
                   We&apos;re committed to providing exceptional service and the
                   highest quality fruits. Reach out to us for inquiries,
-                  partnerships, or to learn more about our sourcing process.
+                  partnerships, or any questions about what we do.
                 </p>
               </div>
 
               <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary-100">
-                    <svg
-                      className="size-6 text-primary-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      Address
-                    </h3>
-                    <p className="text-gray-600">
-                      123 Fresh Market Boulevard
-                      <br />
-                      Import District, ID 12345
-                      <br />
-                      United States
-                    </p>
-                  </div>
-                </div>
-
                 <div className="flex items-start space-x-4">
                   <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-secondary-100">
                     <svg
@@ -172,15 +121,14 @@ const Contact = () => {
                     <h3 className="text-lg font-semibold text-gray-900">
                       Phone
                     </h3>
-                    <p className="text-gray-600">+1 (555) 123-FRUIT</p>
-                    <p className="text-gray-600">+1 (555) 123-7848</p>
+                    <p className="text-gray-600">(555) 123-4567</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="bg-fruit-lime/20 flex size-12 shrink-0 items-center justify-center rounded-lg">
+                  <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-secondary-100">
                     <svg
-                      className="text-fruit-lime size-6"
+                      className="size-6 text-secondary-500"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -198,35 +146,6 @@ const Contact = () => {
                       Email
                     </h3>
                     <p className="text-gray-600">info@puresolimports.com</p>
-                    <p className="text-gray-600">sales@puresolimports.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-accent-100">
-                    <svg
-                      className="size-6 text-accent-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      Business Hours
-                    </h3>
-                    <p className="text-gray-600">
-                      Monday - Friday: 8:00 AM - 6:00 PM
-                    </p>
-                    <p className="text-gray-600">Saturday: 9:00 AM - 4:00 PM</p>
-                    <p className="text-gray-600">Sunday: Closed</p>
                   </div>
                 </div>
               </div>
@@ -325,29 +244,6 @@ const Contact = () => {
           </div>
         </div>
       </Section>
-
-      {/* Call to Action */}
-      <Background color="bg-gradient-to-r from-fruit-orange/10 to-fruit-mango/10">
-        <Section yPadding="py-16">
-          <div className="text-center">
-            <h2 className="mb-4 text-3xl font-bold text-gray-900">
-              Ready to Start Your Fruit Journey?
-            </h2>
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
-              Join hundreds of satisfied customers who trust PureSol Imports for
-              their premium fruit needs.
-            </p>
-            <Link href="/">
-              <Button
-                xl
-                className="bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600"
-              >
-                Explore Our Fruits
-              </Button>
-            </Link>
-          </div>
-        </Section>
-      </Background>
 
       <Footer />
     </div>
