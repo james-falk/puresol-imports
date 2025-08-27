@@ -99,8 +99,8 @@ const MainPage = () => (
     {/* What We Do Section */}
     <Section yPadding="py-20">
       <div className="mx-auto max-w-4xl text-center">
-        <h2 className="mb-6 text-4xl font-light tracking-tight text-neutral-900 md:text-5xl">
-          The PureSol Difference
+        <h2 className="mb-6 text-4xl font-bold tracking-tight text-neutral-900 md:text-5xl">
+          <span className="text-gradient">The PureSol Difference</span>
         </h2>
         <div className="mx-auto mb-8 h-1 w-16 bg-primary-500"></div>
         <p className="text-2xl font-light leading-relaxed text-neutral-600">

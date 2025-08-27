@@ -1,6 +1,6 @@
 const FooterCopyright = () => (
   <div className="footer-copyright">
-    © Copyright 2025, your sole input.
+    © Copyright 2025, PureSol Imports LLC
     {/*
      * PLEASE READ THIS SECTION
      * I'm an indie maker with limited resources and funds, I'll really appreciate if you could have a link to my website.
