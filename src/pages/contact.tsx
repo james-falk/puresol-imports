@@ -1,8 +1,8 @@
+import emailjs from '@emailjs/browser';
 import Link from 'next/link';
 import { useState } from 'react';
 
 import { Background } from '../background/Background';
-import { Button } from '../button/Button';
 import { Meta } from '../layout/Meta';
 import { Section } from '../layout/Section';
 import { NavbarTwoColumns } from '../navigation/NavbarTwoColumns';
@@ -14,9 +14,16 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    company: '',
+    business_name: '',
+    phone_number: '',
     message: '',
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    'idle' | 'success' | 'error'
+  >('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -25,32 +32,94 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    // Clear status when user starts typing again
+    if (submitStatus !== 'idle') {
+      setSubmitStatus('idle');
+      setErrorMessage('');
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = () => {
+    if (!formData.name.trim()) return 'Name is required';
+    if (!formData.email.trim()) return 'Email is required';
+    if (!formData.business_name.trim()) return 'Business name is required';
+    if (!formData.message.trim()) return 'Message is required';
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email))
+      return 'Please enter a valid email address';
+
+    return null;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    // eslint-disable-next-line no-console
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({ name: '', email: '', company: '', message: '' });
+
+    // Validate form
+    const validationError = validateForm();
+    if (validationError) {
+      setSubmitStatus('error');
+      setErrorMessage(validationError);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const result = await emailjs.send(
+        '2WBunC5iMomxgAL_X', // Public Key
+        'pure_sol_contact_us', // Template ID
+        {
+          user_name: formData.name,
+          business_name: formData.business_name,
+          phone_number: formData.phone_number || 'Not provided',
+          message: formData.message,
+          email: formData.email,
+        },
+        '2WBunC5iMomxgAL_X', // Public Key (also used as user ID)
+      );
+
+      if (result.status === 200) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          business_name: '',
+          phone_number: '',
+          message: '',
+        });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setSubmitStatus('error');
+      setErrorMessage(
+        'Failed to send message. Please try again or contact us directly.',
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="text-gray-600 antialiased">
+    <div className="text-neutral-700 antialiased">
       <Meta
         title={`Contact Us - ${AppConfig.site_name}`}
         description="Get in touch with PureSol Imports for premium fruit sourcing and importing services. We're here to help with your fresh fruit needs."
       />
 
-      {/* Header */}
-      <Background color="bg-white border-b border-neutral-200">
+      {/* Navigation */}
+      <Background color="bg-white border-b border-neutral-200 sticky top-0 z-50">
         <Section yPadding="py-4">
           <NavbarTwoColumns logo={<Logo xl />}>
             <li>
               <Link
                 href="/"
-                className="tracking-wide transition-colors hover:text-primary-600"
+                className="font-medium tracking-wide text-primary-700"
               >
                 Home
               </Link>
@@ -59,7 +128,7 @@ const Contact = () => {
             <li>
               <Link
                 href="/contact"
-                className="font-medium tracking-wide text-primary-700"
+                className="tracking-wide transition-colors hover:text-primary-600"
               >
                 Contact
               </Link>
@@ -68,20 +137,29 @@ const Contact = () => {
         </Section>
       </Background>
 
-      <Background color="bg-gradient-to-b from-primary-50 to-white">
+      {/* Hero Section */}
+      <div className="relative bg-gradient-to-b from-primary-50 to-white">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
+          style={{ backgroundImage: 'url(/farm-background.jpg)' }}
+        ></div>
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-50/40 to-white/70"></div>
+
         <Section yPadding="pt-24 pb-32">
-          <div className="mx-auto max-w-4xl text-center">
-            <h1 className="md:text-7xl mb-8 text-6xl font-bold leading-tight tracking-tight text-neutral-900">
-              <span className="text-gradient">Get in Touch</span>
+          <div className="relative z-10 mx-auto max-w-4xl text-center">
+            <h1 className="md:text-7xl animate-fadeInUp mb-8 text-6xl font-bold leading-tight tracking-tight text-neutral-900">
+              <span className="heading-shadow-intense">Get in Touch</span>
             </h1>
-            <div className="mx-auto mb-8 h-1 w-24 bg-primary-500"></div>
+            <div className="mx-auto mb-8 h-1 w-16 bg-neutral-800"></div>
             <p className="mx-auto max-w-3xl text-xl font-light leading-relaxed text-neutral-600 md:text-2xl">
               Ready to source the finest fruits for your business? We&apos;re
               here to help you every step of the way.
             </p>
           </div>
         </Section>
-      </Background>
+      </div>
 
       {/* Contact Form Section */}
       <Section yPadding="py-16">
@@ -90,10 +168,11 @@ const Contact = () => {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h2 className="mb-6 text-3xl font-bold text-gray-900">
+                <h2 className="heading-shadow-intense mb-6 text-3xl font-bold tracking-tight">
                   Contact Information
                 </h2>
-                <p className="mb-8 text-lg text-gray-600">
+                <div className="mb-8 h-1 w-16 bg-neutral-800"></div>
+                <p className="mb-8 text-lg text-neutral-600">
                   We&apos;re committed to providing exceptional service and the
                   highest quality fruits. Reach out to us for inquiries,
                   partnerships, or any questions about what we do.
@@ -102,9 +181,9 @@ const Contact = () => {
 
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-secondary-100">
+                  <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary-100">
                     <svg
-                      className="size-6 text-secondary-500"
+                      className="size-6 text-primary-500"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -118,17 +197,17 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
+                    <h3 className="text-lg font-semibold text-neutral-900">
                       Phone
                     </h3>
-                    <p className="text-gray-600">(555) 123-4567</p>
+                    <p className="text-neutral-600">(555) 123-4567</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
-                  <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-secondary-100">
+                  <div className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-primary-100">
                     <svg
-                      className="size-6 text-secondary-500"
+                      className="size-6 text-primary-500"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -142,10 +221,10 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
+                    <h3 className="text-lg font-semibold text-neutral-900">
                       Email
                     </h3>
-                    <p className="text-gray-600">info@puresolimports.com</p>
+                    <p className="text-neutral-600">info@puresolimports.com</p>
                   </div>
                 </div>
               </div>
@@ -153,9 +232,70 @@ const Contact = () => {
 
             {/* Contact Form */}
             <div className="rounded-2xl bg-white p-8 shadow-xl">
-              <h2 className="mb-6 text-3xl font-bold text-gray-900">
+              <h2 className="heading-shadow-intense mb-6 text-3xl font-bold tracking-tight">
                 Send us a Message
               </h2>
+
+              {/* Success Message */}
+              {submitStatus === 'success' && (
+                <div className="mb-6 rounded-lg border border-green-200 bg-green-50 p-4">
+                  <div className="flex">
+                    <div className="shrink-0">
+                      <svg
+                        className="size-5 text-green-400"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-green-800">
+                        Message Sent Successfully!
+                      </h3>
+                      <div className="mt-2 text-sm text-green-700">
+                        <p>
+                          Thank you for contacting us. You will receive a
+                          confirmation email shortly.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Error Message */}
+              {submitStatus === 'error' && (
+                <div className="mb-6 rounded-lg border border-red-200 bg-red-50 p-4">
+                  <div className="flex">
+                    <div className="shrink-0">
+                      <svg
+                        className="size-5 text-red-400"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-red-800">
+                        Error Sending Message
+                      </h3>
+                      <div className="mt-2 text-sm text-red-700">
+                        <p>{errorMessage}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
@@ -163,7 +303,7 @@ const Contact = () => {
                     htmlFor="name"
                     className="mb-2 block text-sm font-medium text-gray-700"
                   >
-                    Full Name *
+                    Name *
                   </label>
                   <input
                     type="text"
@@ -173,7 +313,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-transparent focus:ring-2 focus:ring-primary-500"
-                    placeholder="Your full name"
+                    placeholder="Your name"
                   />
                 </div>
 
@@ -182,7 +322,7 @@ const Contact = () => {
                     htmlFor="email"
                     className="mb-2 block text-sm font-medium text-gray-700"
                   >
-                    Email Address *
+                    Email *
                   </label>
                   <input
                     type="email"
@@ -192,25 +332,44 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-transparent focus:ring-2 focus:ring-primary-500"
-                    placeholder="your.email@company.com"
+                    placeholder="email@company.com"
                   />
                 </div>
 
                 <div>
                   <label
-                    htmlFor="company"
+                    htmlFor="business_name"
                     className="mb-2 block text-sm font-medium text-gray-700"
                   >
-                    Company Name
+                    Business Name *
                   </label>
                   <input
                     type="text"
-                    id="company"
-                    name="company"
-                    value={formData.company}
+                    id="business_name"
+                    name="business_name"
+                    value={formData.business_name}
+                    onChange={handleChange}
+                    required
+                    className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-transparent focus:ring-2 focus:ring-primary-500"
+                    placeholder="Your company or business name"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="phone_number"
+                    className="mb-2 block text-sm font-medium text-gray-700"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone_number"
+                    name="phone_number"
+                    value={formData.phone_number}
                     onChange={handleChange}
                     className="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-transparent focus:ring-2 focus:ring-primary-500"
-                    placeholder="Your company name"
+                    placeholder="(555) 123-4567"
                   />
                 </div>
 
@@ -229,16 +388,19 @@ const Contact = () => {
                     required
                     rows={5}
                     className="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 transition-colors focus:border-transparent focus:ring-2 focus:ring-primary-500"
-                    placeholder="Tell us about your fruit sourcing needs, volume requirements, or any questions you have..."
+                    placeholder="Tell us about your company and fruit sourcing needs..."
                   />
                 </div>
 
-                <Button
-                  xl
-                  className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 transition-all duration-200 hover:scale-105 hover:from-primary-600 hover:to-secondary-600"
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="inline-block w-full rounded-md bg-neutral-600 px-6 py-4 text-center transition-all duration-200 hover:scale-105 hover:bg-neutral-500 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
                 >
-                  Send Message
-                </Button>
+                  <span className="heading-shadow-intense text-xl font-extrabold">
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </span>
+                </button>
               </form>
             </div>
           </div>

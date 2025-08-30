@@ -35,6 +35,86 @@
   .btn-secondary {
     @apply border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-medium tracking-wide transition-all duration-300;
   }
+  
+  /* Option 1: Elegant Underline with Accent */
+  .heading-option-1 {
+    @apply relative inline-block;
+  }
+  
+  .heading-option-1::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 via-accent-500 to-primary-500;
+    transform: scaleX(0.7);
+    transform-origin: center;
+  }
+  
+  /* Option 2: Bold with Background Highlight */
+  .heading-option-2 {
+    @apply relative inline-block px-4 py-2 bg-gradient-to-r from-primary-100 to-accent-100 rounded-lg border-l-4 border-primary-500;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Option 3: Minimalist with Subtle Border */
+  .heading-option-3 {
+    @apply relative inline-block pb-2;
+  }
+  
+  .heading-option-3::before {
+    content: '';
+    @apply absolute bottom-0 left-1/2 w-16 h-0.5 bg-neutral-800;
+    transform: translateX(-50%);
+  }
+  
+  .heading-option-3::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 w-8 h-0.5 bg-primary-500;
+    transform: translateX(-50%);
+  }
+  
+  /* Option 4: Pill-shaped Background */
+  .heading-option-4 {
+    @apply relative inline-block px-8 py-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full text-white;
+    box-shadow: 0 4px 15px rgba(184, 115, 46, 0.3);
+  }
+  
+  /* Option 5: Angled Background with Border */
+  .heading-option-5 {
+    @apply relative inline-block px-6 py-3 bg-gradient-to-r from-primary-100 via-white to-accent-100;
+    clip-path: polygon(0 0, 95% 0, 100% 50%, 95% 100%, 0 100%, 5% 50%);
+    border: 2px solid;
+    border-image: linear-gradient(45deg, theme('colors.primary.500'), theme('colors.accent.500')) 1;
+  }
+  
+  /* Option 6: Subtle Background with Top Accent */
+  .heading-option-6 {
+    @apply relative inline-block px-6 py-4 bg-gradient-to-b from-primary-50 to-white rounded-lg border-t-4 border-primary-500;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Option 7: Pill-shaped with Subtle Background (Option 4 + Option 6) */
+  .heading-option-7 {
+    @apply relative inline-block px-8 py-3 bg-gradient-to-b from-primary-50 to-white rounded-full border-t-4 border-primary-500;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Intense shadow for headings */
+  .heading-shadow-intense {
+    color: #DAA520; /* Darker golden color */
+    text-shadow: 
+      1px 1px 0px rgba(0, 0, 0, 0.2),
+      2px 2px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo text with yellowish color and black outline */
+  .logo-text-outline {
+    color: #F4A460; /* Sandy brown/yellowish color */
+    text-shadow: 
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000,
+      0px 0px 2px rgba(0, 0, 0, 0.3);
+  }
 }
 
 /* Advanced animations */

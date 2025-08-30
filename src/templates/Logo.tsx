@@ -10,8 +10,8 @@ type ILogoProps = {
 const Logo = (props: ILogoProps) => {
   const size = props.xl ? '44' : '32';
   const fontStyle = props.xl
-    ? 'font-bold text-3xl tracking-tight'
-    : 'font-bold text-xl tracking-wide';
+    ? 'font-bold text-3xl tracking-tight heading-shadow-intense'
+    : 'font-bold text-xl tracking-wide heading-shadow-intense';
 
   if (props.logoPath) {
     return (
@@ -23,7 +23,7 @@ const Logo = (props: ILogoProps) => {
           height={parseInt(size, 10)}
           className="mr-3"
         />
-        <span className="text-gradient">{AppConfig.site_name}</span>
+        <span>{AppConfig.site_name}</span>
       </span>
     );
   }
@@ -38,7 +38,7 @@ const Logo = (props: ILogoProps) => {
         height={parseInt(size, 10)}
         className="mr-3"
       />
-      <span className="text-gradient">{AppConfig.site_name}</span>
+      <span>{AppConfig.site_name}</span>
     </span>
   );
 };
