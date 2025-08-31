@@ -70,16 +70,16 @@ const Contact = () => {
 
     try {
       const result = await emailjs.send(
-        '2WBunC5iMomxgAL_X', // Public Key
+        'pure_sol_gmail', // Service ID
         'pure_sol_contact_us', // Template ID
         {
           user_name: formData.name,
           business_name: formData.business_name,
           phone_number: formData.phone_number || 'Not provided',
           message: formData.message,
-          email: formData.email,
+          business_email: formData.email,
         },
-        '2WBunC5iMomxgAL_X', // Public Key (also used as user ID)
+        '2WBunC5iMomxgAL_X', // Public Key (User ID)
       );
 
       if (result.status === 200) {
@@ -119,7 +119,8 @@ const Contact = () => {
             <li>
               <Link
                 href="/"
-                className="font-medium tracking-wide text-primary-700"
+                className="font-medium tracking-wide text-neutral-900 transition-all duration-200 hover:underline hover:underline-offset-4"
+                style={{ textDecorationColor: '#FFC107' }}
               >
                 Home
               </Link>
@@ -128,7 +129,8 @@ const Contact = () => {
             <li>
               <Link
                 href="/contact"
-                className="tracking-wide transition-colors hover:text-primary-600"
+                className="tracking-wide text-neutral-900 transition-all duration-200 hover:underline hover:underline-offset-4"
+                style={{ textDecorationColor: '#FFC107' }}
               >
                 Contact
               </Link>

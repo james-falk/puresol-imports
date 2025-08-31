@@ -20,7 +20,8 @@ const MainPage = () => (
           <li>
             <Link
               href="/"
-              className="font-medium tracking-wide text-primary-700"
+              className="font-medium tracking-wide text-neutral-900 transition-all duration-200 hover:underline hover:underline-offset-4"
+              style={{ textDecorationColor: '#FFC107' }}
             >
               Home
             </Link>
@@ -29,7 +30,8 @@ const MainPage = () => (
           <li>
             <Link
               href="/contact"
-              className="tracking-wide transition-colors hover:text-primary-600"
+              className="tracking-wide text-neutral-900 transition-all duration-200 hover:underline hover:underline-offset-4"
+              style={{ textDecorationColor: '#FFC107' }}
             >
               Contact
             </Link>
@@ -151,6 +153,13 @@ const MainPage = () => (
     {/* Product Categories */}
     <Section yPadding="py-20">
       <div className="mx-auto max-w-6xl">
+        {/* Premium Selection Heading */}
+        <div className="mb-8 text-center">
+          <h2 className="heading-shadow-intense text-4xl font-bold tracking-tight">
+            Premium Selection
+          </h2>
+        </div>
+
         {/* Selection Display Image */}
         <div className="mb-8 flex justify-center">
           <Image
@@ -158,15 +167,9 @@ const MainPage = () => (
             alt="Selection Display"
             width={500}
             height={500}
-            className="shadow-lg"
+            className="rounded-lg shadow-lg"
+            style={{ width: 'auto', height: 'auto' }}
           />
-        </div>
-
-        {/* Premium Selection Heading */}
-        <div className="mb-6 text-center">
-          <h2 className="heading-shadow-intense text-4xl font-bold tracking-tight">
-            Premium Selection
-          </h2>
         </div>
 
         {/* Product Description */}
