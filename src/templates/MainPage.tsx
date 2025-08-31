@@ -106,10 +106,10 @@ const MainPage = () => (
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div className="order-2 lg:order-1">
-              <h2 className="heading-shadow-intense mb-8 text-4xl font-bold tracking-tight">
+              <h2 className="heading-shadow-intense mb-8 text-center text-4xl font-bold tracking-tight lg:text-left">
                 True Farm Direct
               </h2>
-              <div className="mb-8 h-1 w-16 bg-neutral-800"></div>
+              <div className="mx-auto mb-8 h-1 w-16 bg-neutral-800 lg:mx-0"></div>
               <p className="mb-6 text-lg font-light leading-relaxed text-neutral-600">
                 <strong className="text-neutral-800">
                   From Our Farm to Your Business—No Middlemen
@@ -155,9 +155,10 @@ const MainPage = () => (
       <div className="mx-auto max-w-6xl">
         {/* Premium Selection Heading */}
         <div className="mb-8 text-center">
-          <h2 className="heading-shadow-intense text-4xl font-bold tracking-tight">
+          <h2 className="heading-shadow-intense mb-6 text-4xl font-bold tracking-tight">
             Premium Selection
           </h2>
+          <div className="mx-auto mb-8 h-1 w-16 bg-neutral-800"></div>
         </div>
 
         {/* Selection Display Image */}
@@ -198,7 +199,7 @@ const MainPage = () => (
                 className="h-80 w-full rounded-t-lg object-cover object-center"
               />
               <div className="h-28 p-3">
-                <h3 className="heading-shadow-intense mb-1 text-base font-medium tracking-wide transition-colors group-hover:text-primary-600">
+                <h3 className="heading-shadow-intense mb-1 text-center text-base font-medium tracking-wide transition-colors group-hover:text-primary-600 lg:text-left">
                   Superior Quality
                 </h3>
                 <p className="text-xs leading-tight text-neutral-600">
@@ -221,7 +222,7 @@ const MainPage = () => (
                 className="h-80 w-full rounded-t-lg object-cover"
               />
               <div className="h-28 p-3">
-                <h3 className="heading-shadow-intense mb-1 text-base font-medium tracking-wide transition-colors group-hover:text-secondary-600">
+                <h3 className="heading-shadow-intense mb-1 text-center text-base font-medium tracking-wide transition-colors group-hover:text-secondary-600 lg:text-left">
                   Direct Shipping
                 </h3>
                 <p className="text-xs leading-tight text-neutral-600">
@@ -244,7 +245,7 @@ const MainPage = () => (
                 className="h-80 w-full rounded-t-lg object-cover"
               />
               <div className="h-28 p-3">
-                <h3 className="heading-shadow-intense mb-1 text-base font-medium tracking-wide transition-colors group-hover:text-accent-600">
+                <h3 className="heading-shadow-intense mb-1 text-center text-base font-medium tracking-wide transition-colors group-hover:text-accent-600 lg:text-left">
                   Reliable Seasonal Supply
                 </h3>
                 <p className="text-xs leading-tight text-neutral-600">

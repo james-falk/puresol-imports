@@ -149,16 +149,12 @@ const Contact = () => {
         {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary-50/40 to-white/70"></div>
 
-        <Section yPadding="pt-24 pb-32">
+        <Section yPadding="pt-16 pb-20">
           <div className="relative z-10 mx-auto max-w-4xl text-center">
             <h1 className="md:text-7xl animate-fadeInUp mb-8 text-6xl font-bold leading-tight tracking-tight text-neutral-900">
               <span className="heading-shadow-intense">Get in Touch</span>
             </h1>
             <div className="mx-auto mb-8 h-1 w-16 bg-neutral-800"></div>
-            <p className="mx-auto max-w-3xl text-xl font-light leading-relaxed text-neutral-600 md:text-2xl">
-              Ready to source the finest fruits for your business? We&apos;re
-              here to help you every step of the way.
-            </p>
           </div>
         </Section>
       </div>
