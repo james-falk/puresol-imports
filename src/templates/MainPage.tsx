@@ -44,11 +44,11 @@ const MainPage = () => (
     <div className="relative bg-gradient-to-b from-primary-50 to-white">
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
         style={{ backgroundImage: 'url(/farm-background.jpg)' }}
       ></div>
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-50/40 to-white/70"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-primary-50/20 to-white/40"></div>
 
       <Section yPadding="pt-24 pb-32">
         <div className="relative z-10 mx-auto max-w-4xl text-center">
