@@ -105,7 +105,7 @@ const MainPage = () => (
       <Section yPadding="py-20">
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-            <div>
+            <div className="order-2 lg:order-1">
               <h2 className="heading-shadow-intense mb-8 text-4xl font-bold tracking-tight">
                 True Farm Direct
               </h2>
@@ -134,7 +134,7 @@ const MainPage = () => (
                 buying from a farmer and buying from a broker.
               </p>
             </div>
-            <div className="animate-slideInRight relative">
+            <div className="animate-slideInRight relative order-1 lg:order-2">
               <div className="group relative flex h-96 items-center justify-center overflow-hidden rounded-lg">
                 <Image
                   src="/fruit-in-buckets.jpg"
